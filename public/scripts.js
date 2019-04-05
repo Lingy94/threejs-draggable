@@ -11,7 +11,7 @@ var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 var cube = new THREE.Mesh( geometry, material );
 scene.add( cube );
 
-camera.position.z = 100;
+camera.position.z = 500;
 
 var objects = [];
 function init() {
@@ -19,9 +19,10 @@ function init() {
 	scene.add(ambientLight)
 
 	var light = new THREE.SpotLight( 0xffffff, 1.5 )
+	light.position.set( 0, 500, 2000 );
 	scene.add(light)
 
-	var geometry = new THREE.SphereGeometry( 40, 40, 40)
+	var geometry = new THREE.SphereGeometry( 20, 20, 20)
 	for (let i = 0; i < 100 ; i++ ) {
 		var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: Math.random() * 0xffffff } ) );
  
@@ -39,16 +40,12 @@ function init() {
 	}
 	var controls = new THREE.DragControls( objects, camera, renderer.domElement );
 }
-
+var moveCamera = new THREE.OrbitControls( camera )
 
 scene.background = new THREE.Color( 0xf0f0f0 );
 
 var animate = function () {
 	requestAnimationFrame( animate );
-
-	cube.rotation.x += 0.1;
-	cube.rotation.y += 0.1;
-
 	renderer.render(scene, camera);
 };
 init();
